@@ -1,1 +1,542 @@
-<h1 style="color: blue;">Esta Es mi Plantilla Para Playco</h1>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Makondo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="icon" href="https://res.cloudinary.com/dl0q94vc8/image/upload/v1746665217/makondo_odvdbm.ico" type="image/x-icon">
+  <!-- Bootstrap CSS -->
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css " rel="stylesheet">
+<script src="https://unpkg.com/lottie-web@5.9.6/build/player/lottie.min.js"></script>
+<style>
+  body {
+    background-color:  #121212 !important;
+
+  color:white; /* Texto claro */
+  font-weight: bold;
+}
+
+body.dark-mode {
+  background-color: #121212; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+}
+.audio-item {
+  background-color: #121212; /* Fondo oscuro */
+
+  border: 1px solid #444; /* Borde oscuro para los audios */
+}
+  /* Estilo para el reproductor de audio */
+audio {
+  background-color: #b47415;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* Contenedor principal de cada audio */
+.audio-item {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.75rem;
+  background-color: #121212; /* Fondo oscuro */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.audio-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Imagen del audio */
+.audio-thumb {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.audio-thumb:hover {
+  transform: scale(1.05);
+}
+
+/* Detalles del audio */
+.audio-details {
+  flex-grow: 1;
+}
+
+.audio-details h5 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.audio-meta p {
+  margin-bottom: 0.3rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Reproductor */
+.audio-player {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .audio-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .audio-thumb {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+
+  .audio-details {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .audio-meta p {
+    font-size: 0.95rem;
+  }
+}
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+  .sticky-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #ffc107;
+  }
+
+  .sticky-header h2:hover{
+    color: #ffc107;
+
+  }
+  
+/* Botón Modo Oscuro más moderno */
+.sticky-header .btn-dark {
+  background-color: #343a40;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.sticky-header .btn-dark:hover {
+  background-color: #495057;
+}
+  .dark-mode {
+    background-color: #121212 !important;
+    color: white !important;
+  }
+  
+  .dark-mode .audio-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+  }
+  
+  .dark-mode .audio-details h2,
+  .dark-mode .audio-meta p {
+    color: white;
+  }
+  .dark-mode h2{
+    color: rgb(241, 240, 240);
+    font-weight: bold;
+
+  }
+.container {
+  background-color:  #121212 !important;
+
+}
+/* Estilo moderno para barra de búsqueda */
+.input-group {
+  max-width: 400px;
+  margin: 1rem auto;
+}
+
+.input-group .form-control {
+  border-radius: 30px 0 0 30px;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+}
+
+.input-group .btn-dark {
+  border-radius: 0 30px 30px 0;
+  padding: 0.5rem 1rem;
+}
+
+.btn-whatsapp-custom {
+  background-color: #25d366;
+  color: white !important;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-whatsapp-custom:hover {
+  background-color: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive: en pantallas pequeñas, reduce y centra mejor */
+@media (max-width: 576px) {
+  .btn-whatsapp-custom {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+
+  .whatsapp-icon {
+    width: 24px !important;
+    margin-right: 0.3rem;
+  }
+
+  .whatsapp-text {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+/* Animación al hacer scroll */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+#whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.5s ease;
+  background-color: #25d366;
+  color: white;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+}
+
+/* Mostrar botón cuando esté activo */
+#whatsapp-float.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.logo-animado {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.logo-animado:hover {
+  transform: scale(1.1) rotate(3deg);
+  opacity: 0.9;
+}
+p{
+  color: white;
+  font-weight: bold;
+}
+.lb-close {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  font-size: 24px;
+  text-decoration: none;
+  z-index: 99999;
+  cursor: pointer;
+  font-family: sans-serif;
+  transition: all 0.3s ease;
+}
+
+.lb-close:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.titulo-audio {
+  animation: fadeInUp 0.8s ease-out;
+  font-size: 1.5rem;
+  color: #f8f9fa;
+  background: linear-gradient(90deg, #19dccf, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Estilo general para el select */
+.custom-select-genero {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border: 2px solid #25d366;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  max-width: 250px;
+}
+
+/* Cambios al enfocar */
+.custom-select-genero:focus {
+  outline: none;
+  border-color: #19dccf;
+  box-shadow: 0 0 0 0.2rem rgba(37, 211, 102, 0.3);
+  background-color: #2a2a2a;
+}
+
+/* Opciones dentro del select */
+.custom-select-genero option {
+  background-color: #121212;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .custom-select-genero {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+</style>
+</head>
+<body >
+
+    <!-- CABECERA STICKY -->
+    <div class="container py-5 text-center"  style="border: 3px solid rgb(21, 210, 40);" >
+      <div class="d-flex justify-content-center mb-3">
+        <img src="https://res.cloudinary.com/dupr2cjyf/image/upload/v1748388083/code_gyrnaj.jpg" alt="Logo Makondo" class="img-fluid logo-animado" style="width: 120px; height: auto;">
+
+      </div>
+    
+      <h2 class="text-white fw-bold mb-3">
+        🎧 Audios disponibles para tus <span class="text-info">creaciones audiovisuales</span>
+      </h2>
+    
+<p class="text-light mb-4">Explora más de 200 archivos de sonido para tus sincronizaciones.</p>
+{% if g %}
+  <div class="alert alert-info text-center small mt-3 mb-0">
+    Filtrando por género: <strong>{{ g|title }}</strong>
+    <a href="?q={{ q }}" class="ms-2 text-decoration-none">Limpiar filtro</a>
+  </div>
+{% endif %}
+<form method="get" class="d-flex justify-content-center flex-wrap gap-2">
+  <div class="input-group w-75 w-md-auto flex-grow-1 shadow-sm">
+    <input type="text" name="q" class="form-control rounded-start" placeholder="Buscar por título o género" value="{{ q }}">
+    <!-- Campo oculto para mantener el filtro de género -->
+    {% if g %}
+      <input type="hidden" name="g" value="{{ g }}">
+    {% endif %}
+    <button type="submit" class="btn btn-dark rounded-end">
+      🔍 Buscar
+    </button>
+  </div>
+
+  <!-- Select de géneros -->
+<!-- Select de géneros con clase personalizada -->
+<select name="g" id="genero" class="form-select custom-select-genero" onchange="this.form.submit()">
+  <option value="">Todos los géneros</option>
+  {% for genero in generos %}
+    <option value="{{ genero }}" {% if g == genero %}selected{% endif %}>
+      {{ genero|title }}
+    </option>
+  {% endfor %}
+</select>
+
+
+    </div>
+    
+  {% for audio in audios %}
+<div class="audio-item d-flex flex-column flex-md-row mb-4 p-3 shadow-sm rounded bg-dark text-white">
+
+  <!-- Imagen a la izquierda -->
+  <div class="flex-shrink-0 me-md-4 text-center mb-3 mb-md-0" style="width: 200px;">
+    <a href="{{ audio.imagen.url }}" data-lightbox="audiophoto" data-title="Imagen de {{ audio.titulo }}">
+      <img src="{{ audio.imagen.url }}" class="img-fluid rounded" style="max-height: 180px; object-fit: cover;" alt="Imagen de {{ audio.titulo }}">
+    </a>
+  </div>
+
+  <!-- Contenido a la derecha -->
+  <div class="flex-grow-1">
+<h5 class="mb-3 text-center text-info fw-bold titulo-audio">{{ audio.titulo }}</h5>
+
+    <div class="row">
+      <div class="col-sm-6 mb-3">
+        <p class="fw-bold mb-1">🎤 <strong>Intérprete:</strong> {{ audio.interprete }}</p>
+        <p class="fw-bold mb-1">📝 <strong>Compositor:</strong> {{ audio.compositor }}</p>
+
+      </div>
+      <div class="col-sm-6 mb-2">
+        <p class="fw-bold mb-1">🎼 <strong>Género:</strong> {{ audio.genero }}</p>
+
+        <p class="fw-bold mb-1">📊 <strong>Derechos Autor:</strong> {{ audio.derechos_autor }}</p>
+      </div>
+    </div>
+
+    <audio controls class="audio-player w-100 mt-3">
+      <source src="{{ audio.archivo.url }}" type="audio/mpeg">
+      Tu navegador no soporta el reproductor de audio.
+    </audio>
+  </div>
+
+</div>
+{% endfor %}
+
+          
+          
+    <!-- Paginación -->
+    {% if is_paginated %}
+<nav>
+  <ul class="pagination justify-content-center mt-4">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?{% if request.GET.genero %}genero={{ request.GET.genero }}&{% endif %}page={{ page_obj.previous_page_number }}">
+          ⬅️ Anterior
+        </a>
+      </li>
+    {% endif %}
+
+    <li class="page-item disabled">
+      <a class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</a>
+    </li>
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?{% if request.GET.genero %}genero={{ request.GET.genero }}&{% endif %}page={{ page_obj.next_page_number }}">
+          Siguiente ➡️
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+  <script>
+ 
+   
+    document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById('whatsapp-float');
+    
+    // Mostrar siempre después de un pequeño delay para que se vea la animación
+    setTimeout(() => {
+      btn.classList.add('show');
+    }, 300);
+  });
+    document.addEventListener("click", function(e) {
+    if (e.target.closest(".audio-thumb")) {
+      // Detener todos los audios antes de abrir Lightbox
+      const audios = document.querySelectorAll("audio");
+      audios.forEach(a => a.pause());
+    }
+  });
+  // Detener todos los audios cuando uno empiece a reproducirse
+  document.addEventListener("play", function(e) {
+    if (e.target.tagName === 'AUDIO') {
+      const allAudios = document.querySelectorAll('audio');
+      allAudios.forEach(audio => {
+        if (audio !== e.target) {
+          audio.pause();
+        }
+      });
+    }
+  }, true)
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const generoSelect = document.querySelector('select[name="genero"]');
+    if (generoSelect) {
+      generoSelect.addEventListener('change', function () {
+        this.form.submit();
+      });
+    }
+  });
+</script>
+
+
+  </script>
+  
+
+
+<a href="https://wa.me/573105067238" 
+   target="_blank"
+   style="
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.5s ease-in-out;
+   "
+   id="whatsapp-float">
+   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+        alt="WhatsApp" 
+        width="24" 
+        style="margin-right: 8px;">
+   <span style="font-weight: 500;">Contáctanos por WhatsApp</span>
+</a>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js "></script>
+
+</html>

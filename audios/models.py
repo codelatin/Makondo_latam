@@ -2,7 +2,6 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 
 # Create your models here.
-
 class Audio(models.Model):
     titulo = models.CharField(max_length=200)
     interprete = models.CharField(max_length=200)
@@ -14,4 +13,3 @@ class Audio(models.Model):
     archivo = CloudinaryField(resource_type='video')
     def __str__(self):
         return self.titulo
-
