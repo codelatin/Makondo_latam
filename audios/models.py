@@ -13,3 +13,8 @@ class Audio(models.Model):
     archivo = CloudinaryField(resource_type='video')
     def __str__(self):
         return self.titulo
+    
+
+
+
+
