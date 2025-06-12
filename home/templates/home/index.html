@@ -1,0 +1,774 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Inicio</title>
+    <link rel="stylesheet" href="{% static 'home/css/estilos.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+      
+        :root {
+            --dark-primary: #121212;
+            --dark-secondary: #1e1e1e;
+            --dark-tertiary: #2a2a2a;
+            --neon-green: #00ff88;
+            --neon-green-glow: rgba(0, 255, 136, 0.5);
+            --neon-green-dim: #00cc6a;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-accent: #00ff88;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Fondo general oscuro */
+        body {
+            background: var(--dark-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Efectos de vidrio esmerilado (glassmorphism) */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+        }
+
+        /* Header con efecto neón */
+        header {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neon-green);
+            box-shadow: 0 0 20px var(--neon-green-glow);
+        }
+
+        nav a {
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green-glow);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-green), transparent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+            box-shadow: 0 0 10px var(--neon-green-glow);
+        }
+
+        /* Hero section con overlay oscuro mejorado */
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px var(--neon-green-glow);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--text-primary), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neonPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 20px var(--neon-green-glow); }
+            to { text-shadow: 0 0 30px var(--neon-green-glow), 0 0 40px var(--neon-green-glow); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        /* Botones con efecto neón */
+        .btn-colonial {
+            background: linear-gradient(135deg, var(--dark-secondary), var(--dark-tertiary));
+            color: var(--neon-green);
+            padding: 15px 30px;
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--neon-green-glow);
+        }
+
+        .btn-colonial::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-colonial:hover::before {
+            left: 100%;
+        }
+
+        .btn-colonial:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--neon-green-glow), 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: var(--neon-green);
+            color: var(--dark-primary);
+        }
+
+        /* Secciones con fondo oscuro */
+        .services-section {
+            padding: 80px 0;
+            background: var(--dark-secondary);
+            border-top: 1px solid var(--neon-green);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* Tarjetas de servicio con glassmorphism */
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--neon-green-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-green);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px var(--neon-green-glow);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--neon-green-glow));
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Formularios con estilo oscuro */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark-tertiary);
+            border: 2px solid var(--glass-border);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green-glow);
+        }
+
+        /* Testimoniales con tema oscuro */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--dark-primary);
+        }
+
+        .testimonial-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px;
+            text-align: center;
+            border-left: 5px solid var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Información de contacto */
+        .contact-info {
+            background: linear-gradient(135deg, var(--dark-secondary), var(--dark-tertiary));
+            color: white;
+            padding: 60px 0;
+            border-top: 1px solid var(--neon-green);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-item {
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--neon-green-glow);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--neon-green-glow));
+        }
+
+        /* Carousel items con overlay oscuro */
+        .carousel .item {
+            position: relative;
+        }
+
+        .carousel .item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(18, 18, 18, 0.4);
+            z-index: 1;
+        }
+
+        .carousel .content {
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Botones de navegación del carousel */
+        .arrows button {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .arrows button:hover {
+            background: var(--neon-green);
+            color: var(--dark-primary);
+            box-shadow: 0 0 20px var(--neon-green-glow);
+        }
+
+        /* Efectos de scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-green);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--neon-green-glow);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-green-dim);
+        }
+
+        /* Responsive mejorado */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .btn-colonial {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin: 5px;
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .hero-overlay {
+                padding: 20px;
+                margin: 0 20px;
+            }
+        }
+
+        /* Animaciones adicionales */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card, .testimonial-card, .contact-item {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Efecto de partículas en el fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, var(--neon-green), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(0, 255, 136, 0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, var(--neon-green), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(0, 255, 136, 0.3), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Section -->
+    <header>
+        <div class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav id="nav">
+            <a href="#inicio" class="active">Inicio</a>
+            <a href="{% url 'audios:inicio' %}">Biblioteca</a>
+            <a href="#">Comunidad</a>
+            <a href="#">Grabaciones</a>
+            <a href="#">Editor Audios</a>
+            <a href="#">Contacto</a>
+            <a href="{% url 'auths:registro' %}">Registrate</a>
+
+        </nav>
+    </header>
+
+    <!-- Hero Carousel Section -->
+    <section id="inicio">
+        <div class="carousel">
+            <div class="hero-overlay">
+                <h1 class="hero-title">Aplicacion AudiosMp3</h1>
+                <p class="hero-subtitle">Aquí encontraras una gran variedad de Audios Modernos</p>
+                <div class="hero-buttons">
+                    <a href="#reservar" class="btn-colonial">
+                        <i class="fas fa-calendar-check"></i> Reservar Ahora
+                    </a>
+                    <a href="#servicios" class="btn-colonial">
+                        <i class="fas fa-concierge-bell"></i> Nuestros Servicios
+                    </a>
+                </div>
+            </div>
+
+            <div class="list">
+                <div class="item" style="background-image: url('{% static 'home/img/luffy1.jpeg' %}');">
+                    <div class="content">
+                        <div class="title">App Streaming</div>
+                        <div class="name">Reproductor Avanzado</div>
+                        <div class="des">control de velocidad, listas de reproducción personalizadas y modo shuffle. Experiencia de audio premium..</div>
+                    </div>
+                </div>
+
+                <div class="item" style="background-image: url('{% static 'home/img/naruto1.jpg' %}');">
+                    <div class="content">
+                        <div class="title">Biblioteca Musical</div>
+                        <div class="name">Organiza,</div>
+                        <div class="des">Organiza tu colección de audios MP3 con búsqueda avanzada,</div>
+                    </div>
+                </div>
+
+                <div class="item" style="background-image: url('{% static 'home/img/goku2.jpg' %}');">
+                    <div class="content">
+                        <div class="title">Listas de Reproducción</div>
+                        <div class="name">Mis Playlists</div>
+                        <div class="des">Crea, edita y comparte tus playlists favoritas. Playlists colaborativas y descubre música nueva basada en tus gustos.</div>
+                    </div>
+                </div>
+
+                <div class="item" style="background-image: url('{% static 'home/img/goku1.jpg' %}');">
+                    <div class="content">
+                        <div class="title">Grabación</div>
+                        <div class="name">Iniciar Grabación</div>
+                        <div class="des">Graba audio directamente en formato MP3, programa grabaciones automáticas y captura audio del sistema con calidad profesional.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrows">
+                <button class="prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="timeRunning"></div>
+        </div>
+    </section>
+
+    
+
+    <!-- Services Section -->
+   <section class="services-section" id="servicios">
+    <div class="container">
+        <h2 class="text-center">Nuestros Servicios</h2>
+        <div class="heading-border"></div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>Biblioteca Musical</h3>
+                <p>Organiza tu colección de audios MP3 con búsqueda avanzada, filtros por género, artista y año. Gestión inteligente de metadatos.</p>
+                <a href="{% url 'audios:inicio' %}" class="btn-colonial">Ver Biblioteca</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <h3>Reproductor Avanzado</h3>
+                <p>Reproductor con ecualizador, control de velocidad, listas de reproducción personalizadas y modo shuffle. Experiencia de audio premium.</p>
+                <a href="#" class="btn-colonial">Abrir Reproductor</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-list-music"></i>
+                </div>
+                <h3>Listas de Reproducción</h3>
+                <p>Crea, edita y comparte tus playlists favoritas. Playlists colaborativas y descubre música nueva basada en tus gustos.</p>
+                <a href="#" class="btn-colonial">Mis Playlists</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-waveform-lines"></i>
+                </div>
+                <h3>Editor de Audio</h3>
+                <p>Edita tus archivos MP3 con herramientas profesionales. Corta, normaliza volumen, aplica efectos y convierte formatos.</p>
+                <a href="#" class="btn-colonial">Editor Audio</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Estadísticas</h3>
+                <p>Analiza tus hábitos de escucha con gráficos detallados. Descubre tus géneros favoritos y tiempo de reproducción.</p>
+                <a href="http://localhost:8501/" class="btn-colonial">Ver Estadísticas</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-microphone-alt"></i>
+                </div>
+                <h3>Grabación</h3>
+                <p>Graba audio directamente en formato MP3, programa grabaciones automáticas y captura audio del sistema con calidad profesional.</p>
+                <a href="#" class="btn-colonial">Iniciar Grabación</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Comunidad</h3>
+                <p>Conecta con otros amantes de la música, comparte playlists, descubre recomendaciones y participa en la comunidad musical.</p>
+                <a href="#" class="btn-colonial">Únete a la Comunidad</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Almacenamiento en la Nube</h3>
+                <p>Sincroniza tu música en todos tus dispositivos. Backup automático y acceso desde cualquier lugar a tu colección personal.</p>
+                <a href="#" class="btn-colonial">Sincronizar</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>IA Musical</h3>
+                <p>Recomendaciones inteligentes, reconocimiento automático de canciones, transcripción de audio a texto y análisis musical avanzado.</p>
+                <a href="#" class="btn-colonial">Descubrir IA</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>API & Móvil</h3>
+                <p>Accede a tu música desde aplicaciones móviles y terceros. API robusta para desarrolladores y sincronización multiplataforma.</p>
+                <a href="#" class="btn-colonial">Documentación API</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Búsqueda Inteligente</h3>
+                <p>Encuentra música por letras, melodía, género o estado de ánimo. Búsqueda por similitud musical y filtros avanzados.</p>
+                <a href="#" class="btn-colonial">Buscar Música</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Premium</h3>
+                <p>Desbloquea funciones premium: audio sin límites, herramientas profesionales de edición, almacenamiento ilimitado y soporte prioritario.</p>
+                <a href="#" class="btn-colonial">Hazte Premium</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Featured Spaces Section -->
+   
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="text-center">Lo Que Dicen Nuestros Huéspedes</h2>
+            <div class="heading-border"></div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
+                <div class="testimonial-card">
+                    <div style="font-size: 2rem; color: var(--colonial-gold); margin-bottom: 15px;">★★★★★</div>
+                    <p>"Una experiencia única. El hotel conserva perfectamente el encanto colonial mientras ofrece todas las comodidades modernas."</p>
+                    <strong>- María González</strong>
+                </div>
+                <div class="testimonial-card">
+                    <div style="font-size: 2rem; color: var(--colonial-gold); margin-bottom: 15px;">★★★★★</div>
+                    <p>"Perfecto para nuestra boda. Los jardines son espectaculares y el servicio fue excepcional."</p>
+                    <strong>- Carlos y Ana Martínez</strong>
+                </div>
+                <div class="testimonial-card">
+                    <div style="font-size: 2rem; color: var(--colonial-gold); margin-bottom: 15px;">★★★★★</div>
+                    <p>"La gastronomía es extraordinaria. Cada plato es una obra de arte con sabores auténticos."</p>
+                    <strong>- Roberto Silva</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info" id="contacto">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 50px;">Información de Contacto</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Ubicación</h3>
+                    <p>Calle Colonial 123<br>Centro Histórico<br>Bogotá, Colombia</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Teléfono</h3>
+                    <p>+57 (1) 234-5678<br>WhatsApp: +57 300 123 4567</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>reservas@hotelcolonial.com<br>eventos@hotelcolonial.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horarios</h3>
+                    <p>Recepción: 24/7<br>Restaurante: 6:00 AM - 10:00 PM<br>Piscina: 8:00 AM - 8:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer">
+        <div class="container">
+            <div class="grid-3">
+                <div class="text-center">
+                    <h3>Hotel Colonial</h3><br>
+                    <p>Sumérgete en la historia y tradición de nuestro hotel colonial. Donde cada detalle cuenta una historia y cada huésped vive una experiencia única e inolvidable.</p>
+                </div>
+                <div class="text-center">
+                    <h3>Enlaces Rápidos</h3><br>
+                    <div class="site-links">
+                        <a href="#hospedaje">Habitaciones</a>
+                        <a href="#restaurante">Restaurante</a>
+                        <a href="#eventos">Eventos</a>
+                        <a href="#pasadias">Pasadías</a>
+                        <a href="#contacto">Contacto</a>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <h3>Síguenos</h3><br>
+                    <div class="social">
+                        <ul>
+                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/facebook-new.png"/></a></li>
+                            <li><a href="#"><img src="https://img.icons8.com/fluency/48/null/instagram-new.png"/></a></li>
+                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/twitter--v1.png"/></a></li>
+                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/whatsapp--v1.png"/></a></li>
+                            <li><a href="#"><img src="https://img.icons8.com/color/48/null/tripadvisor.png"/></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copyright Section -->
+    <section class="copyright">
+        <div class="container text-center">
+            <p>© 2025 Hotel Colonial. Todos los derechos reservados. | Diseño por <a href="#">Tu Empresa</a></p>
+        </div>
+        <a id="back-to-top" class="btn-colonial" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="{% static 'home/js/app.js' %}"></script>
+    <script>
+        // Smooth scrolling para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        document.getElementById('back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Validación del formulario de reserva
+        document.querySelector('.booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            
+            if (new Date(checkin) >= new Date(checkout)) {
+                alert('La fecha de salida debe ser posterior a la fecha de llegada.');
+                return;
+            }
+            
+            // Aquí enviarías los datos al backend
+            alert('¡Gracias por tu reserva! Te contactaremos pronto para confirmar la disponibilidad.');
+        });
+    </script>
+</body>
+</html>

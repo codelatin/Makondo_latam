@@ -15,3 +15,4 @@ class AuthAdmin(UserAdmin):
     fieldsets=()
 
 admin.site.register(Auth, AuthAdmin)
+#Perfecto desarrolladores vam os bien 

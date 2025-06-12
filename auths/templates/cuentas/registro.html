@@ -1,1 +1,557 @@
-<h1 style="background-color: blue;font-weight: bold;text-align: center;color: aliceblue;font-weight: bold;">Bienvenidos a la vista Registro</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Audio App Moderno Neón</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+    
+<body>
+<style>
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo general con gradiente oscuro y partículas */
+.section-content {
+    background: linear-gradient(135deg, #121212, #1a1a1a, #0a0a0a);
+    padding: 20px;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Efecto de partículas de fondo */
+.section-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(74, 222, 128, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(74, 222, 128, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(74, 222, 128, 0.05) 0%, transparent 50%);
+    z-index: 1;
+    animation: float-particles 15s ease-in-out infinite;
+}
+
+@keyframes float-particles {
+    0%, 100% { 
+        background-image: 
+            radial-gradient(circle at 20% 80%, rgba(74, 222, 128, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(74, 222, 128, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(74, 222, 128, 0.05) 0%, transparent 50%);
+    }
+    50% { 
+        background-image: 
+            radial-gradient(circle at 25% 70%, rgba(74, 222, 128, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 75% 30%, rgba(74, 222, 128, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.07) 0%, transparent 50%);
+    }
+}
+
+/* Contenedor principal centrado */
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Tarjeta principal con efecto glassmorphism */
+.card {
+    background: rgba(18, 18, 18, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(74, 222, 128, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    width: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(74, 222, 128, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* Efecto de brillo sutil en la tarjeta */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.1), transparent);
+    transition: left 3s ease-in-out;
+    z-index: 1;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+/* Título con efecto neón suave */
+.card-header h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #4ade80;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-shadow: 
+        0 0 10px rgba(74, 222, 128, 0.5),
+        0 0 20px rgba(74, 222, 128, 0.3),
+        0 0 30px rgba(74, 222, 128, 0.1);
+    position: relative;
+    z-index: 2;
+    animation: pulse-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% {
+        text-shadow: 
+            0 0 10px rgba(74, 222, 128, 0.5),
+            0 0 20px rgba(74, 222, 128, 0.3),
+            0 0 30px rgba(74, 222, 128, 0.1);
+    }
+    100% {
+        text-shadow: 
+            0 0 15px rgba(74, 222, 128, 0.7),
+            0 0 25px rgba(74, 222, 128, 0.5),
+            0 0 35px rgba(74, 222, 128, 0.3);
+    }
+}
+
+/* Línea decorativa bajo el título */
+.card-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #4ade80, transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+}
+
+/* Card body con padding mejorado */
+.card-body {
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Formulario con mejor estructura */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Grupos de formulario con mejor espaciado */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+/* Grid responsive para campos en fila */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Labels con estilo moderno y mejor posicionamiento */
+.form-label {
+    color: #4ade80;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Inputs con estilo futurista y mejor responsive */
+.form-control {
+    background: rgba(18, 18, 18, 0.8);
+    border: 2px solid rgba(74, 222, 128, 0.3);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 52px;
+}
+
+.form-control:focus {
+    background: rgba(18, 18, 18, 0.9);
+    border-color: #4ade80;
+    box-shadow: 
+        0 0 15px rgba(74, 222, 128, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 8px 16px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+/* Botón con gradiente moderno y efectos neón */
+.btn-primary {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    border: none;
+    padding: 16px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    color: #121212;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 10px 20px rgba(74, 222, 128, 0.3),
+        0 0 20px rgba(74, 222, 128, 0.2);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    cursor: pointer;
+    width: 100%;
+    min-height: 56px;
+}
+
+/* Efecto de onda en el botón */
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 15px 30px rgba(74, 222, 128, 0.4),
+        0 0 30px rgba(74, 222, 128, 0.3);
+}
+
+/* Enlaces con efectos neón */
+.text-center {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text-center a {
+    color: #4ade80;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 8px;
+    position: relative;
+    text-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+}
+
+.text-center a:hover {
+    color: #22c55e;
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+    background: rgba(74, 222, 128, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Lista de errores con estilo moderno */
+.errorlist {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 10px;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(239, 68, 68, 0.1);
+}
+
+/* Efectos decorativos sutiles */
+.card-body::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 6px;
+    height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 10px #4ade80,
+        0 0 20px #4ade80,
+        0 0 30px #4ade80;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.card-body::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 4px;
+    height: 4px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 8px #4ade80,
+        0 0 16px #4ade80;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite 1s;
+}
+
+/* Responsive design mejorado */
+@media (max-width: 768px) {
+    .section-content {
+        padding: 15px;
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+    
+    .container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .card {
+        border-radius: 16px;
+        margin: 0;
+    }
+    
+    .card-body {
+        padding: 25px 20px;
+    }
+    
+    .card-header h2 {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .form {
+        gap: 20px;
+    }
+    
+    .form-control {
+        padding: 12px 16px;
+        font-size: 16px; /* Evita zoom en iOS */
+        min-height: 48px;
+    }
+    
+    .btn-primary {
+        padding: 14px 20px;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    .form-label {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-content {
+        padding: 10px;
+        padding-top: 30px;
+    }
+    
+    .card-body {
+        padding: 20px 15px;
+    }
+    
+    .card-header h2 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    .form {
+        gap: 18px;
+    }
+    
+    .form-control {
+        padding: 10px 14px;
+        min-height: 44px;
+    }
+    
+    .btn-primary {
+        padding: 12px 18px;
+        min-height: 46px;
+    }
+}
+
+/* Animación de entrada suave */
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Efecto de hover en los form-groups */
+.form-group:hover .form-label {
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+    transform: translateX(2px);
+}
+
+/* Mejoras para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+
+<section class="section-content">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <header class="card-header">
+                    <h2>Registrate</h2>
+                </header>
+                
+                <form action="{% url 'auths:registro' %}"  method="POST" class="form">
+                    {% csrf_token %}
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="apellido">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" name="apellido" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="telefono">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" placeholder="+57 123 456 7890" name="telefono" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="password">Crear Contraseña</label>
+                            <input type="password" class="form-control" id="password" placeholder="••••••••" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="confirmar_password">Repetir Contraseña</label>
+                            <input type="password" class="form-control" id="confirmar_password" placeholder="••••••••" name="confirmar_password" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary">Registrate</button>
+                    </div>
+                    
+                    <!-- Aquí irían los errores del formulario Django -->
+                    <!-- {{ formulario.errors }} -->
+                    <!-- {{ formulario.non_field_errors }} -->
+                </form>
+                
+                <p class="text-center">¿Ya tienes cuenta? <a href="{% url 'auths:login' %}">Login</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
