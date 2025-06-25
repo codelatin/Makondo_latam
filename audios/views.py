@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Audio, ReproduccionAudio
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse,JsonResponse,Http404
+from .models import Audio, ReproduccionAudio,ContactoDescarga
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
 from django.utils import timezone
@@ -12,6 +12,14 @@ from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from .serializers import AudioStatsSerializer 
 from auths.models import Auth 
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.views.decorators.http import require_POST
+from django.core.exceptions import ValidationError
+from django.contrib import messages
+import json
+import os
+from .forms import ContactoDescargaForm
+from django.urls import reverse
 
 # Create your views here.
 
@@ -129,4 +137,93 @@ def audio_detail_api(request, pk):
 class AudioViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Audio.objects.all()
     serializer_class = AudioSerializer
+
+
+@csrf_protect
+@require_POST
+def procesar_descarga(request):
+    """
+    Procesa el formulario de contacto y permite la descarga del audio
+    """
+    try:
+        data = json.loads(request.body)
+        audio_id = data.get('audio_id')
+        nombre = data.get('nombre', '').strip()
+        correo = data.get('correo', '').strip()
+        telefono = data.get('telefono', '').strip()
+
+        if not all([audio_id, nombre, correo, telefono]):
+            return JsonResponse({
+                'success': False, 
+                'error': 'Todos los campos son obligatorios'
+            }, status=400)
+
+        try:
+            audio = Audio.objects.get(id=audio_id)
+        except Audio.DoesNotExist:
+            return JsonResponse({
+                'success': False, 
+                'error': 'Audio no encontrado'
+            }, status=404)
+
+        contacto = ContactoDescarga.objects.create(
+            nombre=nombre,
+            correo=correo,
+            telefono=telefono,
+            audio=audio,
+            ip_address=get_client_ip(request)
+        )
+
+        download_url = request.build_absolute_uri(
+            reverse('audios:descargar_audio', args=[str(audio.id)])
+        ) + f"?token={contacto.id}"
+
+        return JsonResponse({
+            'success': True,
+            'download_url': download_url,
+            'message': 'Datos guardados correctamente. Iniciando descarga...'
+        })
+
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'error': 'Formato JSON inválido'
+        }, status=400)
+
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': 'Error interno del servidor'
+        }, status=500)
+
+def descargar_audio(request, audio_id):
+    token = request.GET.get('token')
+
+    if not token:
+        raise Http404("Acceso no autorizado")
+
+    try:
+        contacto = ContactoDescarga.objects.get(id=token)
+        audio = get_object_or_404(Audio, id=audio_id)
+
+        if contacto.audio_id != audio.id:
+            raise Http404("Token inválido")
+
+        if not audio.archivo:
+            raise Http404("Archivo no disponible")
+
+        return redirect(audio.archivo.url)
+
+    except ContactoDescarga.DoesNotExist:
+        raise Http404("Token inválido")
+
+def get_client_ip(request):
+    """Obtener la IP real del cliente"""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 

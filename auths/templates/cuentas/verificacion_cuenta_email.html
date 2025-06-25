@@ -1,0 +1,239 @@
+{% autoescape off %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Activa tu cuenta</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #121212 50%, #1a1a1a 100%);
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      color: #e0e0e0;
+    }
+    
+    .container {
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,0.5),
+        0 0 40px rgba(0,255,136,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      border: 1px solid rgba(0,255,136,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        #00ff88, 
+        #00ff88, 
+        transparent
+      );
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 5px #00ff88;
+      }
+      to {
+        box-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88;
+      }
+    }
+    
+    h1 {
+      color: #00ff88;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-shadow: 
+        0 0 10px rgba(0,255,136,0.5),
+        0 0 20px rgba(0,255,136,0.3),
+        0 0 30px rgba(0,255,136,0.1);
+      letter-spacing: -0.5px;
+    }
+    
+    p {
+      font-size: 16px;
+      color: #e0e0e0;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+    
+    strong {
+      color: #00ff88;
+      font-weight: 600;
+      text-shadow: 0 0 5px rgba(0,255,136,0.3);
+    }
+    
+    .btn-container {
+      text-align: center;
+      margin: 40px 0;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: linear-gradient(145deg, #00ff88, #00cc6a);
+      color: #121212;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 8px 25px rgba(0,255,136,0.3),
+        0 0 0 1px rgba(0,255,136,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.2), 
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 35px rgba(0,255,136,0.4),
+        0 0 0 1px rgba(0,255,136,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+    
+    .warning-text {
+      background: rgba(255,193,7,0.1);
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 30px 0;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #ffc107;
+    }
+    
+    .footer {
+      margin-top: 50px;
+      font-size: 12px;
+      text-align: center;
+      color: #666;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-weight: 300;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .logo-text {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #00ff88, #00cc6a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0,255,136,0.5);
+    }
+    
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0,255,136,0.3), 
+        transparent
+      );
+      margin: 30px 0;
+    }
+    
+    /* Efectos de resplandor para el contenedor */
+    .container {
+      animation: containerGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes containerGlow {
+      from {
+        box-shadow: 
+          0 10px 30px rgba(0,0,0,0.5),
+          0 0 40px rgba(0,255,136,0.1),
+          inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+      to {
+        box-shadow: 
+          0 10px 30px rgba(0,0,0,0.5),
+          0 0 60px rgba(0,255,136,0.2),
+          inset 0 1px 0 rgba(255,255,255,0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <div class="logo-text">CodeLatin</div>
+    </div>
+    
+    <h1>¡Bienvenido al Futuro!</h1>
+    
+    <p>Hola <strong>{{ user.nombre }}</strong>,</p>
+    
+    <p>Te damos la bienvenida a <strong>CodeLatin</strong>, donde la tecnología cobra vida. Tu registro ha sido exitoso y estás a un paso de acceder a nuestra plataforma.</p>
+    
+    <div class="divider"></div>
+    
+    <p>Para completar tu registro y activar tu cuenta, simplemente haz clic en el botón de abajo:</p>
+    
+    <div class="btn-container">
+      <a href="http://{{ domain }}{% url 'auths:activar_cuenta' uidb64=uid token=token %}" class="btn">
+        Activar Cuenta
+      </a>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <div class="warning-text">
+      <strong>⚠️ Importante:</strong> Si no te registraste en nuestro sitio, puedes ignorar este correo de forma segura.
+    </div>
+    
+    <div class="footer">
+      © {{ current_year|default:"2025" }} CodeLatin. Todos los derechos reservados.<br>
+      <span style="color: #00ff88;">Impulsado por tecnología del futuro</span>
+    </div>
+  </div>
+</body>
+</html>
+{% endautoescape %}
